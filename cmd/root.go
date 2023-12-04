@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var Day int
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "aoc2023",
@@ -17,7 +19,9 @@ var rootCmd = &cobra.Command{
 	Long:  `Advent of code 2023! Provide the day number as an argument, e.g. $ aoc-2023 -d 1`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	Run: func(cmd *cobra.Command, args []string) { fmt.Println("Hello world!") },
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Day: ", Day)
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -38,5 +42,7 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
+	rootCmd.Flags().IntVarP(&Day, "day", "d", 0, "Day (required)")
+	rootCmd.MarkFlagRequired("day")
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
